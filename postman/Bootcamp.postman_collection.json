@@ -554,7 +554,7 @@
 												"header": [],
 												"body": {
 													"mode": "raw",
-													"raw": "{\r\n        \"name\": \"Ahorro\",\r\n        \"type\": \"P\",\r\n        \"category\": \"A\",\r\n        \"description\": \"Cuenta bancaria\",\r\n        \"monthlyMovements\": 10\r\n    }",
+													"raw": "{\r\n        \"type\": \"P\",\r\n        \"category\": \"B\",\r\n        \"description\": \"Moneda Virtual\",\r\n        \"pricePurchase\": 3.14,\r\n        \"priceSale\": 3.25\r\n    }",
 													"options": {
 														"raw": {
 															"language": "json"
@@ -888,6 +888,64 @@
 							"name": "gestion_monederos",
 							"item": [
 								{
+									"name": "bootCoin",
+									"item": [
+										{
+											"name": "Listar bootCoin",
+											"request": {
+												"method": "GET",
+												"header": [],
+												"url": {
+													"raw": "localhost:8072/bootCoin/list?typeBootCoin=T",
+													"host": [
+														"localhost"
+													],
+													"port": "8072",
+													"path": [
+														"bootCoin",
+														"list"
+													],
+													"query": [
+														{
+															"key": "typeBootCoin",
+															"value": "T"
+														}
+													]
+												}
+											},
+											"response": []
+										},
+										{
+											"name": "Comprar o Vender bootcoin",
+											"request": {
+												"method": "POST",
+												"header": [],
+												"body": {
+													"mode": "raw",
+													"raw": "{\r\n  \"type\": \"C\",\r\n  \"bootCoinAmount\": 10,\r\n  \"paymentMode\": \"Y\",\r\n  \"walletId\": \"677ff06ddeea8c5eb02f44f5\",\r\n  \"productId\": \"6789a9f814020f5b783bcf32\"\r\n}",
+													"options": {
+														"raw": {
+															"language": "json"
+														}
+													}
+												},
+												"url": {
+													"raw": "localhost:8072/bootCoin/buyOrSellBootCoin",
+													"host": [
+														"localhost"
+													],
+													"port": "8072",
+													"path": [
+														"bootCoin",
+														"buyOrSellBootCoin"
+													]
+												}
+											},
+											"response": []
+										}
+									]
+								},
+								{
 									"name": "Listar monederos",
 									"request": {
 										"method": "GET",
@@ -1025,7 +1083,7 @@
 										"method": "GET",
 										"header": [],
 										"url": {
-											"raw": "localhost:8072/wallet/walletTransactions/67859164cdab14272c2e0d79",
+											"raw": "localhost:8072/wallet/walletTransactions/677ff06ddeea8c5eb02f44f5",
 											"host": [
 												"localhost"
 											],
@@ -1033,7 +1091,7 @@
 											"path": [
 												"wallet",
 												"walletTransactions",
-												"67859164cdab14272c2e0d79"
+												"677ff06ddeea8c5eb02f44f5"
 											]
 										}
 									},
@@ -1046,7 +1104,7 @@
 										"header": [],
 										"body": {
 											"mode": "raw",
-											"raw": "{\r\n  \"mobileDestination\": \"987654333\",\r\n  \"amount\": 8,\r\n  \"description\": \"pal partido\"\r\n}",
+											"raw": "{\r\n  \"mobileDestination\": \"987654312\",\r\n  \"amount\": 10,\r\n  \"description\": \"----\"\r\n}",
 											"options": {
 												"raw": {
 													"language": "json"
@@ -1074,7 +1132,7 @@
 										"method": "PUT",
 										"header": [],
 										"url": {
-											"raw": "localhost:8072/wallet/associateDebitCardWithAnWallet/67859164cdab14272c2e0d79?debitCardId=6780096e2ed55d6f3264f5c7",
+											"raw": "localhost:8072/wallet/associateDebitCardWithAnWallet/677ff06ddeea8c5eb02f44f5?debitCardId=6780096e2ed55d6f3264f5c7",
 											"host": [
 												"localhost"
 											],
@@ -1082,12 +1140,58 @@
 											"path": [
 												"wallet",
 												"associateDebitCardWithAnWallet",
-												"67859164cdab14272c2e0d79"
+												"677ff06ddeea8c5eb02f44f5"
 											],
 											"query": [
 												{
 													"key": "debitCardId",
 													"value": "6780096e2ed55d6f3264f5c7"
+												}
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Asociar BootCoin",
+									"request": {
+										"method": "PUT",
+										"header": [],
+										"url": {
+											"raw": "localhost:8072/wallet/associateBootCoinWithAWallet/6780096e2ed55d6f3264f5c7",
+											"host": [
+												"localhost"
+											],
+											"port": "8072",
+											"path": [
+												"wallet",
+												"associateBootCoinWithAWallet",
+												"6780096e2ed55d6f3264f5c7"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "realizar la transacción de bootcoin",
+									"request": {
+										"method": "PUT",
+										"header": [],
+										"url": {
+											"raw": "localhost:8072/wallet/bootCoinTransaction/6780096e2ed55d6f3264f5c7?bootCoinId=678db68bf2b7cb63364528dc",
+											"host": [
+												"localhost"
+											],
+											"port": "8072",
+											"path": [
+												"wallet",
+												"bootCoinTransaction",
+												"6780096e2ed55d6f3264f5c7"
+											],
+											"query": [
+												{
+													"key": "bootCoinId",
+													"value": "678db68bf2b7cb63364528dc"
 												}
 											]
 										}
@@ -1223,6 +1327,71 @@
 											"path": [
 												"microservice-customermanagement",
 												"dev"
+											]
+										}
+									},
+									"response": []
+								}
+							]
+						},
+						{
+							"name": "circuit-breaker",
+							"item": [
+								{
+									"name": "Detalles del circuit-breaker",
+									"request": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "http://localhost:8081/actuator/circuitbreakers",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "8081",
+											"path": [
+												"actuator",
+												"circuitbreakers"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Listar personas Copy",
+									"request": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "http://localhost:8082/person/list",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "8082",
+											"path": [
+												"person",
+												"list"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Listar clientes Copy",
+									"request": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "http://localhost:8081/customer/list",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "8081",
+											"path": [
+												"customer",
+												"list"
 											]
 										}
 									},
